@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FRAME AI — Premium Photography Studio</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  
+  <!-- External Libraries -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<!-- Global Authentication Container -->
+<div id="authRoot" class="auth-root" style="display:none"></div>
+
+<div class="app-shell">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">F</div>
+      <div>
+        <strong>FRAME <span>AI</span></strong>
+        <small>Studio Intelligence</small>
+      </div>
+    </div>
+    
+    <nav>
+      <div class="nav-label">OVERVIEW</div>
+      <a class="nav-item active" href="#dashboard" data-page="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+      
+      <div class="nav-label">WORKSPACE</div>
+      <a class="nav-item" href="#projects" data-page="projects"><i data-lucide="layers-3"></i>Projects</a>
+      <a class="nav-item" href="#bookings" data-page="bookings"><i data-lucide="calendar-days"></i>Bookings</a>
+      <a class="nav-item" href="#calendar" data-page="calendar"><i data-lucide="calendar"></i>Calendar</a>
+      <a class="nav-item" href="#clients" data-page="clients"><i data-lucide="users"></i>Clients</a>
+      <a class="nav-item" href="#gallery" data-page="gallery"><i data-lucide="images"></i>Gallery</a>
+      
+      <div class="nav-label">TEAM & PRICING</div>
+      <a class="nav-item" href="#photographers" data-page="photographers"><i data-lucide="camera"></i>Photographers Team</a>
+      <a class="nav-item" href="#packages" data-page="packages"><i data-lucide="package"></i>Packages & Rates</a>
+      <a class="nav-item" href="#ai-editing" data-page="ai-editing"><i data-lucide="wand-sparkles"></i>AI Editing</a>
+      
+      <div class="nav-label">BUSINESS</div>
+      <a class="nav-item" href="#invoices" data-page="invoices"><i data-lucide="receipt-text"></i>Invoices</a>
+      <a class="nav-item" href="#analytics" data-page="analytics"><i data-lucide="chart-no-axes-combined"></i>Analytics</a>
+      
+      <div class="nav-label">SYSTEM</div>
+      <a class="nav-item" href="#notifications" data-page="notifications"><i data-lucide="bell"></i>Notifications <em>4</em></a>
+      <a class="nav-item" href="#settings" data-page="settings"><i data-lucide="settings-2"></i>Settings</a>
+    </nav>
+    
+    <div class="studio-card">
+      <div class="avatar">FC</div>
+      <div>
+        <strong>Frame Creative</strong>
+        <small>Pro Studio</small>
+      </div>
+      <span class="online-dot"></span>
+      <small class="online-text">AI Online</small>
+    </div>
+  </aside>
+
+  <!-- Main View -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn mobile-only" id="menuBtn"><i data-lucide="menu"></i></button>
+      <div class="crumb">
+        <span id="pageTitle">Dashboard</span>
+        <small> / Studio Overview</small>
+      </div>
+      
+      <button class="search-box" id="searchBtn">
+        <i data-lucide="search"></i>
+        <span>Search anything...</span>
+        <kbd>⌘K</kbd>
+      </button>
+      
+      <div class="top-actions">
+        <button class="status-pill" onclick="openAction('insights')"><span></span> AI Online</button>
+        <button class="icon-btn" id="quickBtn" title="Quick add"><i data-lucide="plus"></i></button>
+        <button class="icon-btn has-dot" id="notifBtn" title="Notifications"><i data-lucide="bell"></i></button>
+        <button class="profile" id="profileBtn" title="Studio Profile">
+          <span class="avatar sm">AC</span>
+          <span>
+            <strong>Alex Carter</strong>
+            <small>Studio Owner</small>
+          </span>
+          <i data-lucide="chevron-down"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Dynamic Routed Content -->
+    <section class="content" id="content"></section>
+  </main>
+</div>
+
+<!-- Mobile Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="#dashboard" data-page="dashboard"><i data-lucide="home"></i><span>Home</span></a>
+  <a href="#projects" data-page="projects"><i data-lucide="layers-3"></i><span>Projects</span></a>
+  <a href="#calendar" data-page="calendar"><i data-lucide="calendar"></i><span>Calendar</span></a>
+  <a href="#photographers" data-page="photographers"><i data-lucide="camera"></i><span>Team</span></a>
+  <a href="#packages" data-page="packages"><i data-lucide="package"></i><span>Rates</span></a>
+</div>
+
+<!-- Dynamic Overlay & Modals -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="modal"></div>
+
+<!-- Command Palette (⌘K) -->
+<div class="command" id="command">
+  <div class="command-head">
+    <i data-lucide="search"></i>
+    <input id="commandInput" placeholder="Search clients, projects, bookings, actions...">
+    <kbd>ESC</kbd>
+  </div>
+  <div class="command-results" id="commandResults"></div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div class="toast-wrap" id="toasts"></div>
+
+<!-- Core Application Scripts -->
+<script src="js/auth.js"></script>
+<script src="js/app.js?v=7"></script>
+<script src="js/studioai.js"></script>
+</body>
+</html>
